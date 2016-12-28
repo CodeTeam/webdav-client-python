@@ -330,11 +330,14 @@ class Client(object):
         try:
             urn = Urn(remote_path)
 
-            if self.is_dir(urn.path()):
-                raise OptionNotValid(name="remote_path", value=remote_path)
+            # !!!UGLY HACK!!! We do not support HEAD requests.
+            # These check use them a lot.
+            #
+            # if self.is_dir(urn.path()):
+            #     raise OptionNotValid(name="remote_path", value=remote_path)
 
-            if not self.check(urn.path()):
-                raise RemoteResourceNotFound(urn.path())
+            # if not self.check(urn.path()):
+            #     raise RemoteResourceNotFound(urn.path())
 
             url = {'hostname': self.webdav.hostname, 'root': self.webdav.root, 'path': urn.quote()}
             options = {
