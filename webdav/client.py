@@ -188,7 +188,7 @@ class Client(object):
             try:
                 response_str = response.getvalue()
                 tree = etree.fromstring(response_str)
-                hrees = [unquote(hree.text) for hree in tree.findall(".//{DAV:}href")]
+                hrees = [unquote(hree.text) for hree in tree.findall(".//{DAV:}href") if hree.text != None]
                 return [Urn(hree) for hree in hrees]
             except etree.XMLSyntaxError:
                 return list()
